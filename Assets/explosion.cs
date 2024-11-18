@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 //using System.Numerics;
 
 public class explosion : MonoBehaviour
@@ -45,8 +46,8 @@ public class explosion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            ResetPosition();
-
+            // ResetPosition();
+            Debug.Log("resetting");
         }
     }
 
@@ -60,6 +61,8 @@ public class explosion : MonoBehaviour
     public void Boosting()
     {
         rb.AddForce(transform.forward * thrust, ForceMode.Impulse);
+        // PlayerInput.DeactivateInput
+        // Debug.DrawLine(transform.forward, transform.forward * thrust);
         // boosting = true;
         // if (boosting)
         // {
@@ -77,7 +80,6 @@ public class explosion : MonoBehaviour
             yield return null;
             //yield return new WaitForSeconds(3);
             //print("Boost " + Time.time);
-
         }
     }
 }

@@ -33,6 +33,11 @@ public class playerMovement : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            parent.constraintActive = false;
+        }
+
     }
 
     void BoostMode()
