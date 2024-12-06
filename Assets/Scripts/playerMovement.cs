@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 public class playerMovement : MonoBehaviour
 {
     [SerializeField]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 100f;
     private Rigidbody rb;
 
     public float thrust = 5f;
@@ -38,6 +38,14 @@ public class playerMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
 
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            moveSpeed = 15f;
+
+        }
+
+
     }
 
     // Update is called once per frame
