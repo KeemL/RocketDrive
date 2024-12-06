@@ -9,6 +9,12 @@ public class playerMovement : MonoBehaviour
     private Rigidbody rb;
     private ParentConstraint parent;
 
+    public float thrust = 5f;
+
+    public float smoothingFactor = 10f;
+
+    public float jump = 5f;
+
     // private bool boosting;
 
     private Animator anim;
@@ -20,17 +26,37 @@ public class playerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         anim = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float moveX = Input.GetAxis("Horizontal") * moveSpeed;
         float moveY = Input.GetAxis("Vertical") * moveSpeed;
 
         Vector3 movement = new Vector3(moveX, 0, moveY);
-        rb.linearVelocity = movement;
+        rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
+
+        Debug.Log("movement:");
+        Debug.Log(movement);
+        Debug.Log("linear velocity:");
+        Debug.Log(rb.linearVelocity);
+
+        if (moveX != 0)
+        {
+            anim.SetFloat("Speed", Mathf.Abs(moveX));
+        }
+        else if (moveY != 0)
+        {
+            anim.SetFloat("Speed", 5);
+        }
+        else
+        {
+            anim.SetFloat("Speed", 0);
+        }
+
+
+        transform.forward = Vector3.Lerp(movement, new Vector3(movement.x, 0, movement.z), smoothingFactor * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -40,8 +66,16 @@ public class playerMovement : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            transform.up = new Vector3(movement.x, movement.y * jump, movement.x);
+        }
+
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Debug.Log(moveX);
+            Debug.Log("pressed F");
+            rb.AddForce(transform.right * moveSpeed, ForceMode.Impulse); //blue axis
 
             parent.constraintActive = false;
         }

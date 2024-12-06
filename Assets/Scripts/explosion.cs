@@ -8,6 +8,7 @@ public class explosion : MonoBehaviour
     public float horizontalSpeed = 50.0f;
 
     public float verticalSpeed = 10f;
+    float tiltAngle = 30.0f;
     private Rigidbody rb;
     private IEnumerator coroutine;
 
@@ -52,7 +53,6 @@ public class explosion : MonoBehaviour
             boosting = true;
             //StartCoroutine(BoostTimer());
             Boosting();
-            Debug.Log("pressed E key");
         }
 
 
@@ -60,9 +60,10 @@ public class explosion : MonoBehaviour
 
     public void Boosting()
     {
-        Debug.Log("boosting");
+        //   rb.AddTorque(Vector3.right * tiltAngle, ForceMode.Force);
+
         rb.AddForce(transform.forward * horizontalSpeed, ForceMode.Impulse); //blue axis
-        rb.AddForce(transform.up * verticalSpeed, ForceMode.Impulse); //green axis
+        //rb.AddForce(transform.up * verticalSpeed, ForceMode.Impulse); //green axis
         // rb.AddForce(transform.forward * thrustSpeed, ForceMode.Impulse);
         // PlayerInput.DeactivateInput
         // Debug.DrawLine(transform.forward, transform.forward * thrust);
@@ -72,6 +73,7 @@ public class explosion : MonoBehaviour
         //     StartCoroutine(BoostTimer(3f));
         // }
         // boosting = false;
+        boosting = false;
     }
 
     IEnumerator BoostTimer()
@@ -85,9 +87,9 @@ public class explosion : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Boundary"))
         {
-            //ResetPosition();
+            ResetPosition();
             Debug.Log("resetting");
         }
     }

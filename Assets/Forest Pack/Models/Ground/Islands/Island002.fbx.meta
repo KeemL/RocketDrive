@@ -1,9 +1,26 @@
 fileFormatVersion: 2
 guid: 05b18ec8198b28e49b1d1686110c040c
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209273
+  packageName: Simple Forest Pack
+  packageVersion: 1.1
+  assetPath: Assets/Forest Pack/Models/Ground/Islands/Island002.fbx
+  uploadId: 475017
 ModelImporter:
-  serializedVersion: 20101
+  serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.096
+    second: {fileID: 2100000, guid: 811c5842962212e48b34637ed4aa7c0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.097
+    second: {fileID: 2100000, guid: 9573f7b299c915a4f9cbaa9815108a09, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -14,9 +31,8 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -39,10 +55,12 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -54,6 +72,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -64,6 +83,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -95,14 +115,10 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 209273
-  packageName: Simple Forest Pack
-  packageVersion: 1.1
-  assetPath: Assets/Forest Pack/Models/Ground/Islands/Island002.fbx
-  uploadId: 475017

@@ -18,6 +18,5 @@ public class collision : MonoBehaviour
     void OnCollisionEnter()
     {
         Debug.Log("COLLIDED");
-        rb.AddExplosionForce(10f, transform.position, 2f);
     }
 }
