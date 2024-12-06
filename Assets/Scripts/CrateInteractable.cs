@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -5,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CrateInteractable : MonoBehaviour, IInteractable
+public class CrateInteractable : MonoBehaviour
 {
     public float InteractionRange => 1.5f;
 
@@ -24,7 +25,11 @@ public class CrateInteractable : MonoBehaviour, IInteractable
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
+        {
+            ReadNote();
 
+        }
     }
 
     void Hide()
@@ -68,22 +73,6 @@ public class CrateInteractable : MonoBehaviour, IInteractable
         }
 
 
-    }
-
-    public void Interact(Transform interactorTransform)
-    {
-        ReadNote();
-
-    }
-
-    public string GetInteractText()
-    {
-        return "Read Note";
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
     }
 
 }
