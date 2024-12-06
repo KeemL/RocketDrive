@@ -1,0 +1,21 @@
+
+
+
+- Export FBX from Blender to Unity.
+
+
+If you have a lot of objects in Blender and U want to export correctly to Unity (this means all objects are scaled in Unity = 1), you should select "Selected Objects" and "Apply Transform" in Blender options.
+
+
+- For mobile games.
+
+For mobile games it's recommended to change the material shader in Unity to "mobile/diffused" type.
+
+
+
+
+
+
+For any questions
+
+SandHeroStudio@gmail.com

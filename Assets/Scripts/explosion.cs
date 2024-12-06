@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 //using System.Numerics;
 
 public class explosion : MonoBehaviour
@@ -8,12 +9,14 @@ public class explosion : MonoBehaviour
     public float horizontalSpeed = 50.0f;
 
     public float verticalSpeed = 10f;
-    float tiltAngle = 30.0f;
+    public float tiltAngle = 30.0f;
     private Rigidbody rb;
     private IEnumerator coroutine;
 
     private bool boosting;
     private Vector3 ogTransform;
+
+    private ParentConstraint parent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +25,7 @@ public class explosion : MonoBehaviour
         rb.freezeRotation = true;
         boosting = false;
         ogTransform = transform.position;
+        parent = GetComponent<ParentConstraint>();
     }
 
     // Update is called once per frame
@@ -55,14 +59,19 @@ public class explosion : MonoBehaviour
             Boosting();
         }
 
+        if (parent.constraintActive == true)
+        {
+            rb.linearVelocity = new Vector3(0, 0, 0);
+        }
+
 
     }
 
     public void Boosting()
     {
-        //   rb.AddTorque(Vector3.right * tiltAngle, ForceMode.Force);
+        rb.AddTorque(Vector3.right * tiltAngle, ForceMode.Force);
 
-        rb.AddForce(transform.forward * horizontalSpeed, ForceMode.Impulse); //blue axis
+        // rb.AddForce(transform.forward * horizontalSpeed, ForceMode.Impulse); //blue axis
         //rb.AddForce(transform.up * verticalSpeed, ForceMode.Impulse); //green axis
         // rb.AddForce(transform.forward * thrustSpeed, ForceMode.Impulse);
         // PlayerInput.DeactivateInput

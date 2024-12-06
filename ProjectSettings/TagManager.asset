@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Boundary
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Platforms
+  - Floor
   - 
   - 
   - 

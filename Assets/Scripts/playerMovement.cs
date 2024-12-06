@@ -7,22 +7,23 @@ public class playerMovement : MonoBehaviour
     [SerializeField]
     public float moveSpeed = 5f;
     private Rigidbody rb;
-    private ParentConstraint parent;
+
 
     public float thrust = 5f;
 
     public float smoothingFactor = 10f;
 
-    public float jump = 5f;
+    public float jumpHeight = 5f;
+
 
     // private bool boosting;
 
     private Animator anim;
+
+    public ParentConstraint rocket;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        parent = GetComponent<ParentConstraint>();
-        parent.constraintActive = false;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         anim = GetComponent<Animator>();
@@ -37,10 +38,10 @@ public class playerMovement : MonoBehaviour
         Vector3 movement = new Vector3(moveX, 0, moveY);
         rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
 
-        Debug.Log("movement:");
-        Debug.Log(movement);
-        Debug.Log("linear velocity:");
-        Debug.Log(rb.linearVelocity);
+        // Debug.Log("movement:");
+        // Debug.Log(movement);
+        // Debug.Log("linear velocity:");
+        // Debug.Log(rb.linearVelocity);
 
         if (moveX != 0)
         {
@@ -55,39 +56,25 @@ public class playerMovement : MonoBehaviour
             anim.SetFloat("Speed", 0);
         }
 
-
-        transform.forward = Vector3.Lerp(movement, new Vector3(movement.x, 0, movement.z), smoothingFactor * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (movement != new Vector3(0, 0, 0))
         {
-            // rb.AddForce(transform.forward * thrust, ForceMode.Impulse);
-            BoostMode();
-            //boosting = true;
+            transform.forward = Vector3.Lerp(movement, new Vector3(movement.x, 0, movement.z), smoothingFactor * Time.deltaTime);
+        }
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            rocket.constraintActive = true;
 
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            transform.up = new Vector3(movement.x, movement.y * jump, movement.x);
+            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log(moveX);
-            Debug.Log("pressed F");
-            rb.AddForce(transform.right * moveSpeed, ForceMode.Impulse); //blue axis
-
-            parent.constraintActive = false;
-        }
-
     }
 
-    void BoostMode()
-    {
-        // anim.SetBool("boosting", true);
-        rb.linearVelocity = new Vector3(0, 0, 0);
-        parent.constraintActive = true;
-        Debug.Log("Moving with rocket");
-        //anim.SetBool("boosting", false);
-    }
 }
