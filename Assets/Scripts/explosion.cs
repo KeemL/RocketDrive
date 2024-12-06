@@ -18,6 +18,8 @@ public class explosion : MonoBehaviour
 
     private ParentConstraint parent;
 
+    public AudioSource audioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,38 +28,21 @@ public class explosion : MonoBehaviour
         boosting = false;
         ogTransform = transform.position;
         parent = GetComponent<ParentConstraint>();
+        audioSource = GameObject.Find("ThemeMusic").GetComponent<AudioSource>();
+
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.E))
-    //     {
-    //         // rb.AddForce(transform.forward * thrust, ForceMode.Impulse);
-    //         Boosting();
-
-    //         //Debug.Log("pressed E key");
-    //     }
-
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         rb.AddForce(transform.forward * thrustSpeed, ForceMode.Force);
-    //         //  Boosting();
-
-    //         Debug.Log("pressed Space key");
-    //     }
-
-    // }
-
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             // rb.AddForce(transform.forward * thrust, ForceMode.Impulse);
             boosting = true;
             //StartCoroutine(BoostTimer());
             Boosting();
+            audioSource.Play();
         }
+
 
         if (parent.constraintActive == true)
         {
@@ -69,10 +54,9 @@ public class explosion : MonoBehaviour
 
     public void Boosting()
     {
-        rb.AddTorque(Vector3.right * tiltAngle, ForceMode.Force);
-
-        // rb.AddForce(transform.forward * horizontalSpeed, ForceMode.Impulse); //blue axis
-        //rb.AddForce(transform.up * verticalSpeed, ForceMode.Impulse); //green axis
+        //rb.AddTorque(transform.up * tiltAngle, ForceMode.Impulse);
+        rb.AddForce(transform.forward * horizontalSpeed, ForceMode.Impulse); //blue axis
+        rb.AddForce(transform.up * verticalSpeed, ForceMode.Impulse); //green axis
         // rb.AddForce(transform.forward * thrustSpeed, ForceMode.Impulse);
         // PlayerInput.DeactivateInput
         // Debug.DrawLine(transform.forward, transform.forward * thrust);

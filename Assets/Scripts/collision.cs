@@ -17,6 +17,6 @@ public class collision : MonoBehaviour
 
     void OnCollisionEnter()
     {
-        Debug.Log("COLLIDED");
+
     }
 }

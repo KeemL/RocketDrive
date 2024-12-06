@@ -8,19 +8,21 @@ public class playerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     private Rigidbody rb;
 
-
     public float thrust = 5f;
 
     public float smoothingFactor = 10f;
 
-    public float jumpHeight = 5f;
+    public float jumpHeight = 50f;
 
 
     // private bool boosting;
 
     private Animator anim;
 
-    public ParentConstraint rocket;
+    public Vector3 movement;
+
+    float gravityMultiplier = -20f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,19 +31,22 @@ public class playerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         float moveX = Input.GetAxis("Horizontal") * moveSpeed;
         float moveY = Input.GetAxis("Vertical") * moveSpeed;
-
         Vector3 movement = new Vector3(moveX, 0, moveY);
-        rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
-
-        // Debug.Log("movement:");
-        // Debug.Log(movement);
-        // Debug.Log("linear velocity:");
-        // Debug.Log(rb.linearVelocity);
+        rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y + gravityMultiplier * Time.deltaTime, movement.z); //for gravity
 
         if (moveX != 0)
         {
@@ -58,23 +63,13 @@ public class playerMovement : MonoBehaviour
 
         if (movement != new Vector3(0, 0, 0))
         {
-            transform.forward = Vector3.Lerp(movement, new Vector3(movement.x, 0, movement.z), smoothingFactor * Time.deltaTime);
+            transform.forward = Vector3.Lerp(movement, new Vector3(movement.x, 0, movement.z), smoothingFactor * Time.deltaTime); //rotation turning around and stuff
         }
 
 
 
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            rocket.constraintActive = true;
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
-
-        }
     }
+
+
 
 }
