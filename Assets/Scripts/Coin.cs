@@ -69,14 +69,7 @@ public class Coin : MonoBehaviour, IInteractable
 
     public string GetInteractText()
     {
-        if (valueSaver.CTSdone)
-        {
-            return "Collect Coin";
-        }
-        else
-        {
-            return null;
-        }
+        return "Collect Coin";
     }
 
     public Transform GetTransform()

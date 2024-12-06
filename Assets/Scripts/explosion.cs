@@ -11,12 +11,12 @@ public class explosion : MonoBehaviour
     public float verticalSpeed = 10f;
     public float tiltAngle = 30.0f;
     private Rigidbody rb;
-    private IEnumerator coroutine;
 
     private bool boosting;
+    [SerializeField]
     private Vector3 ogTransform;
 
-    private ParentConstraint parent;
+    //private ParentConstraint parent;
 
     public AudioSource audioSource;
 
@@ -26,8 +26,7 @@ public class explosion : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         boosting = false;
-        ogTransform = transform.position;
-        parent = GetComponent<ParentConstraint>();
+        //parent = GetComponent<ParentConstraint>();
         audioSource = GameObject.Find("ThemeMusic").GetComponent<AudioSource>();
 
     }
@@ -43,18 +42,16 @@ public class explosion : MonoBehaviour
             audioSource.Play();
         }
 
-
-        if (parent.constraintActive == true)
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            rb.linearVelocity = new Vector3(0, 0, 0);
+            ResetPosition();
         }
-
 
     }
 
     public void Boosting()
     {
-        //rb.AddTorque(transform.up * tiltAngle, ForceMode.Impulse);
+        rb.AddTorque(transform.up * tiltAngle, ForceMode.Impulse);
         rb.AddForce(transform.forward * horizontalSpeed, ForceMode.Impulse); //blue axis
         rb.AddForce(transform.up * verticalSpeed, ForceMode.Impulse); //green axis
         // rb.AddForce(transform.forward * thrustSpeed, ForceMode.Impulse);
@@ -69,14 +66,14 @@ public class explosion : MonoBehaviour
         boosting = false;
     }
 
-    IEnumerator BoostTimer()
-    {
-        // rb.AddForce(transform.forward * thrustSpeed, ForceMode.Force);
-        Debug.Log("timer");
-        yield return new WaitForSeconds(5);
-        boosting = false;
-        //print("Boost " + Time.time);
-    }
+    // IEnumerator BoostTimer()
+    // {
+    //     // rb.AddForce(transform.forward * thrustSpeed, ForceMode.Force);
+    //     Debug.Log("timer");
+    //     yield return new WaitForSeconds(5);
+    //     boosting = false;
+    //     //print("Boost " + Time.time);
+    // }
 
     void OnCollisionExit(Collision collision)
     {

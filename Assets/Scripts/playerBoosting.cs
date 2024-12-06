@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class Boosting : MonoBehaviour
+public class playerBoosting : MonoBehaviour
 {
     private Rigidbody rb;
     private ParentConstraint parent;
-
-    private ParentConstraint rocket;
 
     public float thrustSpeed = 30f;
     private bool inRange = false;
@@ -17,33 +15,32 @@ public class Boosting : MonoBehaviour
         parent = GetComponent<ParentConstraint>();
         parent.constraintActive = false;
 
-        rocket = GetComponent<ParentConstraint>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.E) && inRange)
+        if (Input.GetKeyDown(KeyCode.F))
         {
             // rb.AddForce(transform.forward * thrust, ForceMode.Impulse);
-            // BoostMode();
+            BoostMode();
             //boosting = true;
 
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log("pressed F");
-            rb.AddForce(transform.forward * thrustSpeed, ForceMode.Impulse); //blue axis
+        // if (Input.GetKeyDown(KeyCode.F))
+        // {
+        //     Debug.Log("pressed F");
+        //     rb.AddForce(transform.forward * thrustSpeed, ForceMode.Impulse); //blue axis
 
-            parent.constraintActive = false;
-        }
+        //     parent.constraintActive = false;
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            rocket.constraintActive = true;
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     rocket.constraintActive = true;
 
-        }
+        // }
     }
     void BoostMode()
     {

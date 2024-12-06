@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,24 +13,28 @@ public class CrateInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject containerGameObject;
 
+    private bool readingNote = false;
+
     void Start()
     {
         //gameObject.SetActive(true);
         containerGameObject.SetActive(false);
+        readingNote = false;
     }
 
     private void Update()
     {
-        if (isPlayerInRange && Input.GetButton("EKey"))
-        {
-            ReadNote();
 
-        }
-        // if (valueSaver.happyMeal && Input.GetButton("EKey"))
-        // {
-        //     SceneManager.LoadScene("Outdoors");
-        // }
+    }
 
+    void Hide()
+    {
+        containerGameObject.SetActive(false);
+    }
+
+    void Show()
+    {
+        containerGameObject.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,10 +55,17 @@ public class CrateInteractable : MonoBehaviour, IInteractable
 
     private void ReadNote()
     {
+        if (readingNote == true)
+        {
+            Hide();
+            readingNote = false;
 
-        Debug.Log("reading note...");
-
-        containerGameObject.SetActive(true);
+        }
+        else
+        {
+            Show();
+            readingNote = true;
+        }
 
 
     }
@@ -60,6 +73,7 @@ public class CrateInteractable : MonoBehaviour, IInteractable
     public void Interact(Transform interactorTransform)
     {
         ReadNote();
+
     }
 
     public string GetInteractText()
